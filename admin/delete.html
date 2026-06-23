@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LVTech · Admin · Consultar</title>
+    <title>LVTech · Admin · Desactivar</title>
     <link rel="icon" href="./assets/img/logos/favicon-512.png" type="image/png">
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,15 +24,15 @@
 
         <nav class="nav-principal">
             <a href="index.html">VER</a>
-            <a href="get.html" class="activo">CONSULTAR</a>
+            <a href="get.html">CONSULTAR</a>
             <a href="post.html">CREAR</a>
             <a href="put.html">MODIFICAR</a>
-            <a href="delete.html">DESACTIVAR</a>
+            <a href="delete.html" class="activo">DESACTIVAR</a>
         </nav>
     </header>
 
     <main class="productos">
-        <h2>Consultar producto por id</h2>
+        <h2>Desactivar / Reactivar producto</h2>
 
         <form id="getProduct-form">
             <label for="idProd">Id del producto</label>
@@ -67,8 +67,7 @@
                     return;
                 }
 
-                const producto = datos.payload;
-                renderizarProducto(producto);
+                renderizarProducto(datos.payload);
 
             } catch (error) {
                 console.error("Error al obtener el producto: ", error);
@@ -76,8 +75,27 @@
             }
         });
 
+        function mostrarError(mensaje) {
+            contenedorProductos.innerHTML = `
+                <p class="mensaje mensaje-error">${mensaje}</p>
+            `;
+        }
+
+        function mostrarExito(mensaje) {
+            contenedorProductos.innerHTML = `
+                <p class="mensaje mensaje-exito">${mensaje}</p>
+            `;
+        }
+
         function renderizarProducto(producto) {
-            const estadoBadge = producto.active
+            // Dependiendo del estado actual del producto, mostramos el boton contrario
+            const estaActivo = producto.active === 1;
+
+            const botonAccion = estaActivo
+                ? `<button type="button" id="accion-button" class="boton-primario" style="background: var(--peligro);">Desactivar producto</button>`
+                : `<button type="button" id="accion-button" class="boton-primario">Reactivar producto</button>`;
+
+            const estadoBadge = estaActivo
                 ? `<span style="color: green;">● Activo</span>`
                 : `<span style="color: red;">● Inactivo</span>`;
 
@@ -88,19 +106,51 @@
                         <p>
                             Id: ${producto.id} /
                             Nombre: ${producto.name} /
-                            Categoría: ${producto.category} /
                             <strong>Precio: $${Number(producto.price).toLocaleString("es-AR")}</strong> /
                             ${estadoBadge}
                         </p>
+                        ${botonAccion}
                     </li>
                 </ul>
             `;
+
+            const accionButton = document.getElementById("accion-button");
+
+            accionButton.addEventListener("click", event => {
+                event.stopPropagation();
+
+                const accion = estaActivo ? "desactivar" : "activar";
+                const confirmacion = confirm(`¿Querés ${accion} este producto?`);
+
+                if (!confirmacion) {
+                    alert("Operación cancelada");
+                    return;
+                }
+
+                cambiarEstadoProducto(producto.id, accion);
+            });
         }
 
-        function mostrarError(mensaje) {
-            contenedorProductos.innerHTML = `
-                <p class="mensaje mensaje-error">${mensaje}</p>
-            `;
+        async function cambiarEstadoProducto(id, accion) {
+            try {
+                // Llamamos al endpoint correspondiente: /desactivar o /activar
+                const response = await fetch(`${urlBase}/${id}/${accion}`, {
+                    method: "PATCH"
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    mostrarExito(result.message);
+                } else {
+                    console.error("Error: ", result.message);
+                    mostrarError("No se pudo realizar la operación");
+                }
+
+            } catch (error) {
+                console.error("Error: ", error);
+                mostrarError("Ocurrió un error al cambiar el estado del producto");
+            }
         }
     </script>
 </body>
