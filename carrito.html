@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVTech · Carrito</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="marca">
+            <span class="logo" aria-hidden="true">💻</span>
+            <div>
+                <h1 class="nombre-app">LVTech</h1>
+                <p class="alumnos">Francisco &amp; Valentino</p>
+            </div>
+        </div>
+
+        <nav class="nav-principal">
+            <a href="index.html">Inicio</a>
+            <a href="productos.html">Productos</a>
+            <a href="carrito.html" class="activo">Carrito <span id="contador-carrito" class="badge">0</span></a>
+        </nav>
+
+        <button id="boton-tema" class="boton-tema" type="button" aria-label="Cambiar tema">🌙</button>
+    </header>
+
+    <main class="carrito">
+        <h2>Tu carrito</h2>
+
+        <div id="contenedor-carrito" class="lista-carrito"></div>
+
+        <div class="resumen-carrito">
+            <p>Total: <strong id="total-carrito" class="mono">$0</strong></p>
+            <div class="acciones-carrito">
+                <a href="productos.html" class="boton-secundario">Seguir comprando</a>
+                <button type="button" id="boton-confirmar" class="boton-primario">Confirmar compra</button>
+            </div>
+        </div>
+    </main>
+
+    <div id="modal-confirmar" class="modal oculto">
+        <div class="modal-contenido">
+            <h3>Confirmar compra</h3>
+            <p>¿Confirmás la compra por <strong id="modal-total" class="mono">$0</strong>?</p>
+            <div class="modal-acciones">
+                <button type="button" id="modal-cancelar">Cancelar</button>
+                <button type="button" id="modal-aceptar">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="js/tema.js"></script>
+    <script type="module" src="js/guardia.js"></script>
+    <script type="module" src="js/contador-carrito.js"></script>
+    <script type="module" src="js/carrito.js"></script>
+</body>
+</html>

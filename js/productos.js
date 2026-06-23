@@ -64,6 +64,41 @@ function renderizarProductos(productos) {
     });
 }
 
+function agregarAlCarrito(idProducto, productosVisibles) {
+    const producto = productosVisibles.find(p => String(p.id) === String(idProducto));
+    if (!producto) return;
+
+    const inputCantidad = contenedorProductos.querySelector(`.cantidad-input[data-id="${idProducto}"]`);
+    const cantidad = Math.max(1, Number(inputCantidad.value) || 1);
+
+    const carrito = getCarrito();
+    const existente = carrito.find(item => String(item.id) === String(producto.id));
+
+    if (existente) {
+        existente.quantity += cantidad;
+    } else {
+        carrito.push({
+            id: producto.id,
+            name: producto.name,
+            image: producto.image,
+            price: Number(producto.price),
+            quantity: cantidad
+        });
+    }
+
+    setCarrito(carrito);
+    actualizarContadorCarrito();
+
+    alert(`Agregaste ${cantidad} x "${producto.name}" al carrito`);
+}
+
+function actualizarContadorCarrito() {
+    const carrito = getCarrito();
+    const total = carrito.reduce((acc, item) => acc + item.quantity, 0);
+    const badge = document.getElementById("contador-carrito");
+    if (badge) badge.textContent = total;
+}
+
 function renderizarPaginacion(pagination) {
     const { page, totalPages } = pagination;
 
