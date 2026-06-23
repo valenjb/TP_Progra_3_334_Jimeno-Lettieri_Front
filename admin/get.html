@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVTech · Admin · Consultar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="marca">
+            <span class="logo" aria-hidden="true">💻</span>
+            <div>
+                <h1 class="nombre-app">LVTech · Admin</h1>
+                <p class="alumnos">Francisco &amp; Valentino</p>
+            </div>
+        </div>
+
+        <nav class="nav-principal">
+            <a href="index.html">VER</a>
+            <a href="get.html" class="activo">CONSULTAR</a>
+            <a href="post.html">CREAR</a>
+            <a href="put.html">MODIFICAR</a>
+            <a href="delete.html">DESACTIVAR</a>
+        </nav>
+    </header>
+
+    <main class="productos">
+        <h2>Consultar producto por id</h2>
+
+        <form id="getProduct-form">
+            <label for="idProd">Id del producto</label>
+            <input type="number" name="idProd" id="idProd" required>
+            <button type="submit" class="boton-primario">Consultar producto</button>
+        </form>
+
+        <div id="contenedor-productos" style="margin-top: 24px;"></div>
+    </main>
+
+    <script>
+        const contenedorProductos = document.getElementById("contenedor-productos");
+        const getProductForm = document.getElementById("getProduct-form");
+        const urlBase = "http://localhost:3000/api/productos";
+
+        getProductForm.addEventListener("submit", async event => {
+            event.preventDefault();
+
+            const idProd = event.target.idProd.value.trim();
+
+            if (!idProd) {
+                mostrarError("Ingresá un id válido");
+                return;
+            }
+
+            try {
+                const response = await fetch(`${urlBase}/${idProd}`);
+                const datos = await response.json();
+
+                if (!response.ok) {
+                    mostrarError(datos.error || "No se encontró el producto");
+                    return;
+                }
+
+                const producto = datos.payload;
+                renderizarProducto(producto);
+
+            } catch (error) {
+                console.error("Error al obtener el producto: ", error);
+                mostrarError("Ocurrió un error al consultar el producto");
+            }
+        });
+
+        function renderizarProducto(producto) {
+            const estadoBadge = producto.active
+                ? `<span style="color: green;">● Activo</span>`
+                : `<span style="color: red;">● Inactivo</span>`;
+
+            contenedorProductos.innerHTML = `
+                <ul>
+                    <li class="lista-producto">
+                        <img src="${producto.image}" alt="${producto.name}">
+                        <p>
+                            Id: ${producto.id} /
+                            Nombre: ${producto.name} /
+                            Categoría: ${producto.category} /
+                            <strong>Precio: $${Number(producto.price).toLocaleString("es-AR")}</strong> /
+                            ${estadoBadge}
+                        </p>
+                    </li>
+                </ul>
+            `;
+        }
+
+        function mostrarError(mensaje) {
+            contenedorProductos.innerHTML = `
+                <p class="mensaje mensaje-error">${mensaje}</p>
+            `;
+        }
+    </script>
+</body>
+</html>

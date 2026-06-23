@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LVTech · Admin</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <header>
+        <div class="marca">
+            <span class="logo" aria-hidden="true">💻</span>
+            <div>
+                <h1 class="nombre-app">LVTech · Admin</h1>
+                <p class="alumnos">Francisco &amp; Valentino</p>
+            </div>
+        </div>
+
+        <nav class="nav-principal">
+            <a href="index.html" class="activo">VER</a>
+            <a href="get.html">CONSULTAR</a>
+            <a href="post.html">CREAR</a>
+            <a href="put.html">MODIFICAR</a>
+            <a href="delete.html">DESACTIVAR</a>
+        </nav>
+    </header>
+
+    <main class="productos">
+        <h2>Todos los productos</h2>
+        <div id="contenedor-productos" class="grilla-productos"></div>
+    </main>
+
+    <script>
+        const contenedorProductos = document.getElementById("contenedor-productos");
+        const urlBase = "http://localhost:3000/api/productos";
+
+        async function mostrarProductos() {
+            try {
+                // Con ?all=true traemos tambien los productos inactivos
+                const response = await fetch(`${urlBase}?all=true&limit=100`);
+                const datos = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.status}`);
+                }
+
+                const productos = datos.payload;
+                renderizarProductos(productos);
+
+            } catch (error) {
+                console.error("Error al cargar productos: ", error);
+                contenedorProductos.innerHTML = `
+                    <p class="mensaje-error">Error al cargar los productos. ¿Está corriendo el backend?</p>
+                `;
+            }
+        }
+
+        function renderizarProductos(productos) {
+            let htmlProductos = "";
+
+            productos.forEach(producto => {
+                // Si el producto está inactivo lo marcamos visualmente
+                const estadoBadge = producto.active
+                    ? `<span style="color: green;">● Activo</span>`
+                    : `<span style="color: red;">● Inactivo</span>`;
+
+                htmlProductos += `
+                    <article class="card-producto">
+                        <img src="${producto.image}" alt="${producto.name}">
+                        <span class="etiqueta-subcategoria">${producto.category}</span>
+                        <h3>${producto.name}</h3>
+                        <p class="descripcion">${producto.description || ""}</p>
+                        <p class="precio mono">$${Number(producto.price).toLocaleString("es-AR")}</p>
+                        <p>${estadoBadge}</p>
+                    </article>
+                `;
+            });
+
+            contenedorProductos.innerHTML = htmlProductos;
+        }
+
+        mostrarProductos();
+    </script>
+</body>
+</html>
