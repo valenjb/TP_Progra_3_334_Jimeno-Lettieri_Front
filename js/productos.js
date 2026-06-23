@@ -12,7 +12,7 @@ const estado = {
     limit: 8
 };
 
-saludoCliente.textContent = `Hola, ${getCliente()}, elegí tus productos`;
+saludoCliente.textContent = `Hola ${getCliente()}, elegí tus productos`;
 
 async function cargarProductos() {
     contenedorProductos.innerHTML = `<p class="mensaje-vacio">Cargando productos...</p>`;
