@@ -1,5 +1,6 @@
 import { API_URL } from "./config.js";
 import { getCliente, getCarrito, setCarrito, clearCarrito } from "./storage.js";
+import { actualizarContadorCarrito } from "./contador-carrito.js";
 
 const contenedorCarrito = document.getElementById("contenedor-carrito");
 const totalCarritoEl = document.getElementById("total-carrito");
@@ -16,6 +17,7 @@ function renderizarCarrito() {
         contenedorCarrito.innerHTML = `<p class="mensaje-vacio">Tu carrito está vacío. <a href="productos.html">Ver productos</a></p>`;
         totalCarritoEl.textContent = "$0";
         botonConfirmar.disabled = true;
+        actualizarContadorCarrito()
         return;
     }
 
@@ -40,6 +42,8 @@ function renderizarCarrito() {
 
     const total = carrito.reduce((acc, item) => acc + item.price * item.quantity, 0);
     totalCarritoEl.textContent = `$${total.toLocaleString("es-AR")}`;
+
+    actualizarContadorCarrito()
 
     contenedorCarrito.querySelectorAll(".sumar").forEach(boton => {
         boton.addEventListener("click", () => cambiarCantidad(boton.dataset.id, 1));

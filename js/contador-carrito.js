@@ -2,7 +2,7 @@
 // se importa en todas las paginas para que el contador siempre este al dia.
 import { getCarrito } from "./storage.js";
 
-function actualizarContador() {
+export function actualizarContadorCarrito() {
     const carrito = getCarrito();
     const totalItems = carrito.reduce((acc, item) => acc + item.quantity, 0);
     const contador = document.getElementById("contador-carrito");
@@ -11,4 +11,4 @@ function actualizarContador() {
     }
 }
 
-actualizarContador();
+actualizarContadorCarrito();

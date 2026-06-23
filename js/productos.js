@@ -1,5 +1,6 @@
 import { API_URL } from "./config.js";
 import { getCliente, getCarrito, setCarrito } from "./storage.js";
+import { actualizarContadorCarrito } from "./contador-carrito.js";
 
 const contenedorProductos = document.getElementById("contenedor-productos");
 const tabsCategoria = document.getElementById("tabs-categoria");
@@ -92,12 +93,12 @@ function agregarAlCarrito(idProducto, productosVisibles) {
     alert(`Agregaste ${cantidad} x "${producto.name}" al carrito`);
 }
 
-function actualizarContadorCarrito() {
-    const carrito = getCarrito();
-    const total = carrito.reduce((acc, item) => acc + item.quantity, 0);
-    const badge = document.getElementById("contador-carrito");
-    if (badge) badge.textContent = total;
-}
+// function actualizarContadorCarrito() {
+//     const carrito = getCarrito();
+//     const total = carrito.reduce((acc, item) => acc + item.quantity, 0);
+//     const badge = document.getElementById("contador-carrito");
+//     if (badge) badge.textContent = total;
+// }
 
 function renderizarPaginacion(pagination) {
     const { page, totalPages } = pagination;
