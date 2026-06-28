@@ -2,6 +2,7 @@ import { clearCliente, clearCarrito } from "./storage.js";
 
 const contenedorTicket = document.getElementById("contenedor-ticket");
 const botonReiniciar = document.getElementById("boton-reiniciar");
+const botonPdf = document.getElementById("boton-pdf");
 
 const ventaGuardada = sessionStorage.getItem("LVTech_ultima_venta");
 
@@ -49,4 +50,39 @@ botonReiniciar.addEventListener("click", () => {
     clearCarrito();
     clearCliente();
     window.location.href = "index.html";
+});
+
+botonPdf.addEventListener("click", () => {
+    const venta = JSON.parse(sessionStorage.getItem("LVTech_ultima_venta"));
+
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+
+    let y = 10;
+
+    doc.setFontSize(18);
+    doc.text("LVTech - Ticket de compra", 10, y);
+    y += 10;
+
+    doc.setFontSize(12);
+    doc.text(`Cliente: ${venta.client_name}`, 10, y);
+    y += 7;
+
+    const fecha = new Date().toLocaleDateString("es-AR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+    });
+    doc.text(`Fecha: ${fecha}`, 10, y);
+    y += 10;
+
+    venta.productos.forEach(p => {
+        doc.text(`${p.name} x${p.quantity} - $${Number(p.unit_price).toLocaleString("es-AR")}`, 10, y);
+        y += 7;
+    });
+
+    y += 5;
+    doc.text(`Total: $${Number(venta.total).toLocaleString("es-AR")}`, 10, y);
+
+    doc.save(`LVTech-ticket-${venta.client_name}.pdf`);
 });
