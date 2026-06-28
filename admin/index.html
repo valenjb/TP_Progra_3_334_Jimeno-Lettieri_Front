@@ -76,6 +76,7 @@
                         <img src="${producto.image}" alt="${producto.name}">
                         <span class="etiqueta-subcategoria">${producto.category}</span>
                         <h3>${producto.name}</h3>
+                        <p class="descripcion">ID: ${producto.id}</p>
                         <p class="descripcion">${producto.description || ""}</p>
                         <p class="precio mono">$${Number(producto.price).toLocaleString("es-AR")}</p>
                         <p>${estadoBadge}</p>
