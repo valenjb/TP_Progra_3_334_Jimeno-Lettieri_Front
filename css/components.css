@@ -1,0 +1,155 @@
+/* ---------- Grilla y cards de productos ---------- */
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+}
+
+.card-producto {
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.card-producto img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 10px;
+    background: var(--bg);
+}
+
+.card-producto h3 {
+    font-size: 15px;
+}
+
+.card-producto .descripcion {
+    font-size: 12px;
+    color: var(--texto-tenue);
+    margin: 0;
+    min-height: 32px;
+}
+
+.card-producto .precio {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    font-size: 17px;
+    margin: 2px 0;
+}
+
+.acciones-producto {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.cantidad-input {
+    width: 54px;
+    padding: 9px 6px;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    background: var(--bg);
+    color: var(--texto);
+}
+
+.boton-agregar {
+    flex: 1;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 8px;
+    background: var(--primario);
+    color: var(--primario-texto);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+/* ---------- Mensajes ---------- */
+.mensaje-vacio,
+.mensaje-error {
+    text-align: center;
+    color: var(--texto-tenue);
+    padding: 40px 0;
+    grid-column: 1 / -1;
+}
+
+.mensaje-error {
+    color: var(--peligro);
+}
+
+/* ---------- Paginacion ---------- */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+}
+
+.boton-pagina {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    background: var(--bg-elevado);
+    color: var(--texto);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+}
+
+.boton-pagina.activo {
+    background: var(--primario);
+    color: var(--primario-texto);
+    border-color: var(--primario);
+}
+
+/* ---------- Modal ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(14, 20, 32, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.oculto {
+    display: none;
+}
+
+.modal-contenido {
+    background: var(--bg-elevado);
+    border-radius: 14px;
+    padding: 26px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow: var(--sombra);
+}
+
+.modal-acciones {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 18px;
+}
+
+.modal-acciones button {
+    flex: 1;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 600;
+    border: 1px solid var(--borde);
+    background: var(--bg);
+    color: var(--texto);
+}
+
+#modal-aceptar {
+    background: var(--primario);
+    border-color: var(--primario);
+    color: var(--primario-texto);
+}

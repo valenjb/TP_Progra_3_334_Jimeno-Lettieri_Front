@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
+
+/* ---------- Variables globales ---------- */
+:root, body {
+    --bg: #f5f7fa;
+    --bg-elevado: #ffffff;
+    --texto: #1b2430;
+    --texto-tenue: #5b6b7a;
+    --borde: #dce3ea;
+    --primario: #1F6BFF;
+    --primario-texto: #ffffff;
+    --acento: #00b39c;
+    --peligro: #d6453d;
+    --sombra: 0 8px 24px rgba(27, 36, 48, 0.08);
+}
+
+/* ---------- Reset ---------- */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--texto);
+    font-family: 'Inter', system-ui, sans-serif;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+h1, h2, h3 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    margin: 0;
+}
+
+a {
+    color: var(--primario);
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+    cursor: pointer;
+}
+
+/* ---------- Botones ---------- */
+.boton-primario,
+.boton-secundario {
+    display: inline-block;
+    border-radius: 8px;
+    padding: 12px 22px;
+    font-weight: 600;
+    font-size: 14px;
+    border: 1px solid transparent;
+}
+
+.boton-primario {
+    background: var(--primario);
+    color: var(--primario-texto);
+}
+
+.boton-primario:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.boton-secundario {
+    background: var(--bg-elevado);
+    color: var(--texto);
+    border-color: var(--borde);
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 640px) {
+    header {
+        padding: 12px 16px;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .nav-principal {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .item-carrito {
+        grid-template-columns: 48px 1fr;
+        grid-template-areas:
+            "img info"
+            "img cantidad"
+            "img subtotal";
+        row-gap: 4px;
+    }
+
+    .item-carrito img { grid-area: img; }
+
+    .boton-quitar {
+        grid-column: 1 / -1;
+        text-align: right;
+    }
+}

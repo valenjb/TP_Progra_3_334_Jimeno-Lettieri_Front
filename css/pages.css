@@ -1,0 +1,270 @@
+/* ---------- Pantalla de bienvenida ---------- */
+main.bienvenida {
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+.tarjeta-bienvenida {
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 16px;
+    box-shadow: var(--sombra);
+    padding: 40px;
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+}
+
+.tarjeta-bienvenida h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+}
+
+.tarjeta-bienvenida p {
+    color: var(--texto-tenue);
+    margin-bottom: 24px;
+}
+
+#form-bienvenida {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+}
+
+#form-bienvenida label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--texto-tenue);
+}
+
+#form-bienvenida input {
+    padding: 12px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--borde);
+    background: var(--bg);
+    color: var(--texto);
+    font-size: 15px;
+}
+
+#form-bienvenida button {
+    margin-top: 8px;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    background: var(--primario);
+    color: var(--primario-texto);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* ---------- Pantalla de productos ---------- */
+main.productos {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 24px 28px 60px;
+}
+
+.saludo {
+    color: var(--texto-tenue);
+    margin: 0 0 18px;
+}
+
+.filtros {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 22px;
+}
+
+.tabs-categoria {
+    display: inline-flex;
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    padding: 4px;
+}
+
+.tabs-categoria .tab {
+    border: none;
+    background: transparent;
+    color: var(--texto-tenue);
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.tabs-categoria .tab.activo {
+    background: var(--primario);
+    color: var(--primario-texto);
+}
+
+/* ---------- Pantalla de carrito ---------- */
+main.carrito {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px 28px 60px;
+}
+
+.lista-carrito {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.item-carrito {
+    display: grid;
+    grid-template-columns: 56px 1fr auto auto auto;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 12px 14px;
+}
+
+.item-carrito img {
+    width: 56px;
+    height: 56px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.nombre-item {
+    margin: 0;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.precio-item {
+    margin: 2px 0 0;
+    font-size: 12px;
+    color: var(--texto-tenue);
+}
+
+.cantidad-controles {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+.cantidad-controles button {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    border: 1px solid var(--borde);
+    background: var(--bg);
+    color: var(--texto);
+}
+
+.subtotal-item {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 600;
+    margin: 0;
+}
+
+.boton-quitar {
+    border: none;
+    background: transparent;
+    color: var(--peligro);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.resumen-carrito {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 12px;
+    padding: 18px;
+}
+
+.resumen-carrito p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.resumen-carrito strong {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 20px;
+}
+
+.acciones-carrito {
+    display: flex;
+    gap: 10px;
+}
+
+/* ---------- Pantalla de ticket ---------- */
+main.ticket {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 30px 24px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+}
+
+.tarjeta-ticket {
+    width: 100%;
+    background: var(--bg-elevado);
+    border: 1px solid var(--borde);
+    border-radius: 14px;
+    padding: 26px;
+    box-shadow: var(--sombra);
+}
+
+.tarjeta-ticket h2 {
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+.ticket-meta {
+    font-size: 13px;
+    color: var(--texto-tenue);
+    margin: 2px 0;
+}
+
+.tabla-ticket {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13px;
+}
+
+.tabla-ticket th,
+.tabla-ticket td {
+    text-align: left;
+    padding: 6px 4px;
+    border-bottom: 1px dashed var(--borde);
+}
+
+.tabla-ticket th {
+    color: var(--texto-tenue);
+    font-weight: 600;
+}
+
+.ticket-total {
+    text-align: right;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    font-weight: 700;
+    margin: 10px 0 0;
+}
+
+.ticket-gracias {
+    text-align: center;
+    color: var(--texto-tenue);
+    font-size: 13px;
+}
