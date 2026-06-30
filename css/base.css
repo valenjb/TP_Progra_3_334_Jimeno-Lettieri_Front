@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /* ---------- Variables globales ---------- */
-:root, body {
+:root, body[data-tema="claro"] {
     --bg: #f5f7fa;
     --bg-elevado: #ffffff;
     --texto: #1b2430;
@@ -12,6 +12,19 @@
     --acento: #00b39c;
     --peligro: #d6453d;
     --sombra: 0 8px 24px rgba(27, 36, 48, 0.08);
+}
+
+/* ---------- Tema oscuro ---------- */
+
+body[data-tema="oscuro"]  {
+    --bg: #0A1020;
+    --bg-elevado: #081733;
+    --texto: #ffffff;
+    --texto-tenue: #8a9bb0;
+    --borde: #1e2d45;
+    --primario: #3B82FF;
+    --primario-texto: #ffffff;
+    --sombra: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 /* ---------- Reset ---------- */

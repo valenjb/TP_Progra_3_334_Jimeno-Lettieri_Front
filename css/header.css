@@ -17,10 +17,24 @@ header {
     gap: 12px;
 }
 
-.logo {
+.logo-claro, .logo-oscuro {
     height: 3.5rem;
     width: auto;
 }
+
+/* Para el cambio de logo dependiendo del tema */
+.logo-oscuro {
+    display: none;
+}
+
+body[data-tema="oscuro"] .logo-claro {
+    display: none;
+}
+
+body[data-tema="oscuro"] .logo-oscuro {
+    display: block;
+}
+/* fin cambio de logo dependiendo del tema */
 
 .nombre-app {
     font-size: 20px;
@@ -91,4 +105,14 @@ header::after {
 
 @media (prefers-reduced-motion: reduce) {
     header::after { animation: none; }
+}
+
+/* ---------- boton cambio de tema ---------- */
+.boton-tema {
+    background: var(--bg);
+    border: 1px solid var(--borde);
+    border-radius: 8px;
+    width: 35px;
+    height: 30px;
+    font-size: 15px;
 }
