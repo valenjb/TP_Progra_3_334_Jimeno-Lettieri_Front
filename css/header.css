@@ -22,11 +22,11 @@ header {
     width: auto;
 }
 /* ---------- Logo claro/oscuro ---------- */
-body[data-tema="claro"] .logo-oscuro {
+html[data-tema="claro"] .logo-oscuro {
     display: none;
 }
 
-body[data-tema="oscuro"] .logo-claro {
+html[data-tema="oscuro"] .logo-claro {
     display: none;
 }
 /* ---------- Toggle tema ---------- */
@@ -140,14 +140,4 @@ header::after {
 
 @media (prefers-reduced-motion: reduce) {
     header::after { animation: none; }
-}
-
-/* ---------- boton cambio de tema ---------- */
-.boton-tema {
-    background: var(--bg);
-    border: 1px solid var(--borde);
-    border-radius: 8px;
-    width: 35px;
-    height: 30px;
-    font-size: 15px;
 }

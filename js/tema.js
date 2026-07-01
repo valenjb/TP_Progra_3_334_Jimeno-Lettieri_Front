@@ -6,7 +6,7 @@ const thumb = document.getElementById("toggle-thumb");
 const toggle = document.getElementById("boton-tema");
 
 function aplicarTema(tema) {
-    document.body.dataset.tema = tema;
+    document.documentElement.dataset.tema = tema;
 
     if (!track || !thumb || !toggle) return;
 
@@ -27,7 +27,7 @@ const temaGuardado = localStorage.getItem(TEMA_KEY) || "claro";
 aplicarTema(temaGuardado);
 
 toggle?.addEventListener("change", () => {
-    const temaActual = document.body.dataset.tema === "oscuro" ? "claro" : "oscuro";
+    const temaActual = document.documentElement.dataset.tema === "oscuro" ? "claro" : "oscuro";
     localStorage.setItem(TEMA_KEY, temaActual);
     aplicarTema(temaActual);
 });

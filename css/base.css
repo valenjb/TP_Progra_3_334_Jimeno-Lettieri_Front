@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap');
 
 /* ---------- Variables globales ---------- */
-:root, body[data-tema="claro"] {
+:root, html[data-tema="claro"] {
     --bg: #f5f7fa;
     --bg-elevado: #ffffff;
     --texto: #1b2430;
@@ -16,7 +16,7 @@
 
 /* ---------- Tema oscuro ---------- */
 
-body[data-tema="oscuro"]  {
+html[data-tema="oscuro"] {
     --bg: #0A1020;
     --bg-elevado: #081733;
     --texto: #ffffff;
