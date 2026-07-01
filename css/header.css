@@ -29,6 +29,14 @@ html[data-tema="claro"] .logo-oscuro {
 html[data-tema="oscuro"] .logo-claro {
     display: none;
 }
+
+html[data-tema="claro"] .toggle-thumb {
+    transform: translateX(32px);
+}
+
+html[data-tema="claro"] .toggle-track {
+    background: #f0a500;
+}
 /* ---------- Toggle tema ---------- */
 .toggle-tema {
     position: relative;
